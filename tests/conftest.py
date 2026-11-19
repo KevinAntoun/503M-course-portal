@@ -49,6 +49,7 @@ def client(app):
 
 
 def login(client, username, password="Portal1234!"):
+    client.get("/login")
     r = client.post("/login", data={"username": username, "password": password})
     assert r.status_code == 302, f"login failed for {username}"
     return client

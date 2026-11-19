@@ -96,6 +96,14 @@ class Submission(db.Model):
         return self.assignment.course
 
 
+class SubmissionExtension(db.Model):
+    """Server-stored approval for one student's assignment extension."""
+
+    student_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    assignment_id = db.Column(db.Integer, db.ForeignKey("assignment.id"), primary_key=True)
+    approved = db.Column(db.Boolean, nullable=False, default=False)
+
+
 class Mail(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     to_address = db.Column(db.String(120), nullable=False)

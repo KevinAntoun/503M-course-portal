@@ -67,6 +67,7 @@ def test_c6_token_in_the_form_field_is_accepted(client):
 
 
 def test_c7_session_cookie_is_httponly_and_samesite_lax(client):
+    client.get("/login")
     r = client.post("/login", data={"username": "dr_haddad", "password": "Portal1234!"})
     cookies = [h for h in r.headers.getlist("Set-Cookie") if h.startswith("session=")]
     assert cookies, "login set no session cookie"
